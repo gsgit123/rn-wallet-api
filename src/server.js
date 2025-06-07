@@ -5,14 +5,23 @@ import rateLimiter from './middleware/rate.limiter.js';
 
 import transactionsRoute from './routes/transactionsRoute.js';
 
+import job from './config/cron.js';
+
 dotenv.config();
 const app = express();
 
 app.use(rateLimiter);
 
 app.use(express.json());
+
 app.use(express.urlencoded({extended: true}));
 
+
+if(process.env.NODE_ENV==="production")job.start();
+
+app.get("/api/health", (req, res) => {
+    res.status(200).json({message: "API is running smoothly"});
+}   );
 
 
 async function initDB(){
