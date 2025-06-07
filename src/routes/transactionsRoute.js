@@ -8,7 +8,7 @@ router.get('/:userId',getTransactionsById);
 
 router.post('/', createTransaction);
 
-router.delete('/:userId', deleteTransactions);
+router.delete('/:id', deleteTransactions);
 
 router.get('/summary/:userId', getTransactionSummary);
 

@@ -30,9 +30,9 @@ export const createTransaction = async (req, res) => {
 }
 
 export const deleteTransactions=async (req, res) => {
-    const {userId} = req.params;
+    const {id} = req.params;
     try{
-        const result = await sql`DELETE FROM transactions WHERE user_id=${userId} RETURNING *`;
+        const result = await sql`DELETE FROM transactions WHERE id=${id} RETURNING *`;
         if(result.length === 0){
             return res.status(404).json({error: 'Transaction not found'});
         }
